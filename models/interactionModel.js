@@ -34,15 +34,16 @@ const Interaction = sequelize.define(
   }
 );
 
+// Associations: Interaction belongs to a Customer
 Interaction.associate = (models) => {
-  // Interaction belongs to a Customer
   Interaction.belongsTo(models.Customer, {
     foreignKey: "customerId",
     onDelete: "CASCADE", // If the customer is deleted, related interactions are deleted
   });
 };
 
-Interaction.sync()
-  .then()
+Interaction.sync({ alter: true }) // Using alter to update the table if needed
+  .then(() => console.log("Interaction table created or updated"))
   .catch((err) => console.error("Error creating table:", err));
+
 export default Interaction;
