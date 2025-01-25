@@ -38,7 +38,6 @@ const Interaction = sequelize.define(
 Interaction.associate = (models) => {
   Interaction.belongsTo(models.Customer, {
     foreignKey: "customerId",
-    onDelete: "CASCADE", // If the customer is deleted, related interactions are deleted
   });
 };
 

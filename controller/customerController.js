@@ -2,6 +2,7 @@
 
 import { Op } from "sequelize";
 import Customer from "../models/customerModel.js";
+import Interaction from "../models/interactionModel.js";
 
 export const getCustomers = async (request, response) => {
   let { name, email, company, phone, page, limit } = request.query;
@@ -119,6 +120,7 @@ export const deleteCustomer = async (request, response) => {
     if (!customer) {
       return response.status(404).json({ message: "Customer not found" });
     }
+    await Interaction.destroy({ where: { customerId } });
     await customer.destroy();
     response.status(200).json({ message: "Customer Deleted Successfully" });
   } catch (e) {
