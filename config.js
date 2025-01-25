@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 // Load environment variables from .env file
 dotenv.config();
 
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_NAME);
+
 export default {
   development: {
     dialect: "mysql",

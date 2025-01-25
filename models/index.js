@@ -11,6 +11,7 @@ dotenv.config();
 const environment = process.env.NODE_ENV || "development";
 const dbConfig = config[environment];
 
+console.log(dbConfig);
 // Create a Sequelize instance
 const sequelize = new Sequelize(dbConfig);
 
