@@ -1,9 +1,9 @@
 /** @format */
 import express from "express";
 
-import authRoutes from "../crm-backend/routes/authRoutes.js";
-import customerRoutes from "../crm-backend/routes/customerRoutes.js";
-import interactionRoutes from "../crm-backend/routes/interactionRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import customerRoutes from "./routes/customerRoutes.js";
+import interactionRoutes from "./routes/interactionRoutes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
