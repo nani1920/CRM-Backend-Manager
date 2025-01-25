@@ -40,6 +40,8 @@ const Customer = sequelize.define(
         model: "Users", // References the 'Users' table
         key: "id", // References the 'id' field in the 'Users' table
       },
+      onDelete: "CASCADE", // If user is deleted, delete related customers
+      onUpdate: "CASCADE",
     },
   },
   {
@@ -52,9 +54,22 @@ const Customer = sequelize.define(
 
 Customer.associate = (models) => {
   // Customer belongs to User with a foreign key 'userId'
-  Customer.belongsTo(models.User, { foreignKey: "userId" });
-  Customer.hasMany(models.Interaction, { foreignKey: "customerId" });
+  Customer.belongsTo(models.User, {
+    foreignKey: "userId",
+    onDelete: "CASCADE",
+  });
+  Customer.hasMany(models.Interaction, {
+    foreignKey: "customerId",
+    onUpdate: "CASCADE",
+  });
+
+  Customer.hasMany(models.Interaction, {
+    foreignKey: "customerId",
+    onDelete: "CASCADE", // If customer is deleted, delete the related interactions
+    onUpdate: "CASCADE", // If customer id is updated, update related interactions
+  });
 };
+
 Customer.sync()
   .then()
   .catch((err) => console.error("Error creating table:", err));

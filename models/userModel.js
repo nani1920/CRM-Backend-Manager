@@ -53,6 +53,10 @@ User.beforeCreate(async (user) => {
     user.password = await bcrypt.hash(user.password, salt); // Hash the password
   }
 });
+User.associate = (models) => {
+  // Uncomment this if you want to associate users with customers
+  User.hasMany(models.Customer, { foreignKey: "userId", onDelete: "CASCADE" });
+};
 
 // Sync the model with the database (create table if it doesn't exist)
 User.sync()
