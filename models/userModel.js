@@ -55,7 +55,7 @@ User.beforeCreate(async (user) => {
 });
 
 // Sync the model with the database (create table if it doesn't exist)
-User.sync({ alter: true })
+User.sync()
   .then()
   .catch((err) => console.error("Error creating table:", err));
 

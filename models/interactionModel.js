@@ -42,7 +42,7 @@ Interaction.associate = (models) => {
   });
 };
 
-Interaction.sync({ alter: true })
+Interaction.sync()
   .then()
   .catch((err) => console.error("Error creating table:", err));
 export default Interaction;

@@ -10,7 +10,8 @@ const Customer = sequelize.define(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true, // Automatically generates a unique ID
+      autoIncrement: true,
+      allowNull: false, // Automatically generates a unique ID
     },
     // Full name as a combination of first and last names
     name: {
@@ -54,7 +55,7 @@ Customer.associate = (models) => {
   Customer.belongsTo(models.User, { foreignKey: "userId" });
   Customer.hasMany(models.Interaction, { foreignKey: "customerId" });
 };
-Customer.sync({ alter: true })
+Customer.sync()
   .then()
   .catch((err) => console.error("Error creating table:", err));
 
