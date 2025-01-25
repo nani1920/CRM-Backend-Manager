@@ -1,17 +1,26 @@
 /** @format */
 
+import dotenv from "dotenv";
 import config from "../config.js";
 import { Sequelize, DataTypes } from "sequelize";
 
-const sequelize = new Sequelize(config.development);
+// Load environment variables from .env file
+dotenv.config();
+
+// Choose environment configuration (development or production)
+const environment = process.env.NODE_ENV || "development";
+const dbConfig = config[environment];
+
+// Create a Sequelize instance
+const sequelize = new Sequelize(dbConfig);
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully ");
+    console.log("Connection has been established successfully.");
   })
   .catch((e) => {
-    console.log("unable to connect to the database", e);
+    console.error("Unable to connect to the database:", e);
   });
 
 export { sequelize, DataTypes };
