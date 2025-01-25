@@ -7,6 +7,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 const JWT_SECRET = process.env.JWT_SECRET;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+import dotenv from "dotenv";
+dotenv.config();
 
 export const register = async (request, response) => {
   const { username, email, password, role, name, phone, company } =
@@ -119,7 +121,8 @@ export const login = async (request, response) => {
     const payload = {
       userId: userExist.id,
     };
-    const jwtToken = jwt.sign(payload, JWT_SECRET);
+    console.log(JWT_SECRET);
+    const jwtToken = jwt.sign(payload, "WISDOM", { expiresIn: "30d" });
     response.status(200).json({ jwtToken });
   } catch (e) {
     return response.status(500).json({ message: e.message });

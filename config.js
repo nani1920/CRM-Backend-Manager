@@ -1,23 +1,14 @@
 /** @format */
 
-// config/config.js
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const config = {
+export default {
   development: {
-    dialect: "sqlite",
-    storage: "./database.sqlite3",
-  },
-  test: {
-    dialect: "sqlite",
-    storage: "./test.sqlite3",
-  },
-  production: {
-    dialect: "sqlite",
-    storage: "./prod.sqlite3",
+    dialect: "mysql",
+    host: "localhost", // MySQL is running on your local machine
+    username: "root", // Default username for XAMPP MySQL is 'root'
+    password: "", // Default password for XAMPP MySQL is empty (unless you've set one)
+    database: "crm_db", // The database you created
+    define: {
+      timestamps: false, // If you don't want Sequelize to add timestamps
+    },
   },
 };
-
-export default config;

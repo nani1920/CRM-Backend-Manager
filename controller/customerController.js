@@ -4,7 +4,9 @@ import { Op } from "sequelize";
 import Customer from "../models/customerModel.js";
 
 export const getCustomers = async (request, response) => {
-  const { name, email, company, phone, page, limit } = request.query;
+  let { name, email, company, phone, page, limit } = request.query;
+  page = parseInt(page, 10) || 1; // Default to 1 if invalid
+  limit = parseInt(limit, 10) || 10; // Default to 10 if invalid
   const offset = (page - 1) * limit;
   try {
     const requestedQuery = {};
